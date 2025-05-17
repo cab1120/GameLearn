@@ -12,6 +12,8 @@ public class MouseSlice : MonoBehaviour
     public ScreenLineRender lineRenderer;
     private Plane slicePlane;
     private bool drawplane;
+
+    public Transform planeTransform;
     private void OnEnable()
     {
         lineRenderer.OnLineDraw += OnlineDraw;
@@ -27,12 +29,20 @@ public class MouseSlice : MonoBehaviour
         if (Planepos == Vector3.zero)
             Planepos = Vector3.right;
         Vector3 normalVec = Vector3.Cross(Planepos, depth);
-        
-        SliceObjects(start, normalVec);
-        slicePlane.SetNormalAndPosition(normalVec,start);
+        slicePlane = new Plane(normalVec, start);
         //Showplane(slicePlane);
+        SliceObjects(start, normalVec);
+        
     }
-    
+
+    private void Showplane(Plane plane)
+    {
+        Vector3 planePoint = -plane.normal * plane.distance;
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, plane.normal);
+        planeTransform.position = planePoint;
+        planeTransform.rotation = rotation;
+    }
+
     private void SliceObjects(Vector3 point, Vector3 normalVec)
     {
         GameObject[] toSlice = GameObject.FindGameObjectsWithTag("Sliceable");
@@ -42,7 +52,7 @@ public class MouseSlice : MonoBehaviour
             obj = toSlice[i];
             if (IsObjectIntersectedByPlane(obj, slicePlane))
             {
-                Debug.Log(obj.name);
+                Debug.Log("1");
                 SlicedHull hull = obj.Slice(point, normalVec);
                 Material originalMaterial = obj.GetComponent<MeshRenderer>().sharedMaterial;
                 if (hull != null)
