@@ -20,10 +20,21 @@ public class PlayerController3 : MonoBehaviour
     private bool _isGrounded;
     private Vector3 _velocity;
     
+    void OnEnable()
+    {
+        _velocity = Vector3.zero;
+    }
     void Start()
     {
         _velocity.y = -2f;
         Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("角色位置 Y = " + transform.position.y);
+
+        Ray ray = new Ray(transform.position + Vector3.up, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, groundMask))
+        {
+            Debug.Log("探测到地面 Y = " + hit.point.y);
+        }
     }
 
     
@@ -46,6 +57,7 @@ public class PlayerController3 : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         
         Vector3 move = transform.right * x + transform.forward * z;
+        move.y = -2f;
         controller.Move(move * Movespeed * Time.deltaTime);
 
         if (_isGrounded && Input.GetButtonDown("Jump"))

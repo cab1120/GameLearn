@@ -12,12 +12,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - GroundMin
   - Interactor
   - Wall
   - Player
-  - 
-  - 
+  - GroundMiddle
+  - GroundMax
   - 
   - 
   - 

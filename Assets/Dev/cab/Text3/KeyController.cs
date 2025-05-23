@@ -33,7 +33,7 @@ public class KeyController : MonoBehaviour
         //Debug.Log(keyPrefab.transform.position.x);
         newDistance = Vector3.Distance(Player.transform.position, keyPrefab.transform.position);
         if(oldDistance==0)oldDistance = newDistance;
-        if (newDistance-oldDistance>0.01||newDistance-oldDistance<-0.01)
+        if (newDistance-oldDistance>0.03||newDistance-oldDistance<-0.03)
         {
             scale = newDistance/oldDistance;
             ChangeKey(scale);
@@ -44,7 +44,7 @@ public class KeyController : MonoBehaviour
     private void ChangeKey(float Scale)
     {
         BoxCollider boxCollider = keyPrefab.GetComponent<BoxCollider>();
-        Debug.Log(boxCollider.center.y);
+        //Debug.Log(boxCollider.center.y);
         Rigidbody rb = keyPrefab.GetComponent<Rigidbody>();
         
         float oldHeighty = boxCollider.size.y*keyPrefab.transform.localScale.y;

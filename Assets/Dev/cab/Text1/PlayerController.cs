@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private Vector3 _velocity;
     
+    void OnEnable()
+    {
+        //Debug.Log("OnEnable");
+        _velocity = Vector3.zero;
+    }
     void Start()
     {
         _velocity.y = -2f;
@@ -36,23 +41,23 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        //Debug.Log(_isGrounded);
         if (_isGrounded && _velocity.y < 0)
         {
             _velocity.y = -2f;
         }
-        //Debug.Log(_isGrounded);
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * Movespeed * Time.deltaTime);
 
+        Vector3 move = new Vector3();
+        move=Vector3.zero;
+        move = transform.right * x + transform.forward * z;
+        controller.Move(move * Movespeed * Time.deltaTime);
+        
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
+            //Debug.Log("Jump");
             _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        //Debug.Log("Jump velocity = " + Mathf.Sqrt(jumpHeight * -2f * gravity));
         _velocity.y += gravity * Time.deltaTime;
         controller.Move(_velocity * Time.deltaTime);
     }

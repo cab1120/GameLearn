@@ -441,8 +441,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169844534}
-  - component: {fileID: 169844535}
   - component: {fileID: 169844536}
+  - component: {fileID: 169844537}
+  - component: {fileID: 169844538}
   m_Layer: 0
   m_Name: Controltroller
   m_TagString: Untagged
@@ -465,24 +466,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &169844535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169844532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4287b2c523043ef4aa540233291411f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerA: {fileID: 334421336}
-  PlayerB: {fileID: 1919934276}
-  PlayerC: {fileID: 275234840}
-  InteractorA: {fileID: 94932241}
-  InteractorB: {fileID: 1144052697}
-  InteractorC: {fileID: 782434894}
 --- !u!114 &169844536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +484,47 @@ MonoBehaviour:
   MaxCamera: {fileID: 185748470}
   MinCamera: {fileID: 744355357}
   MiddleCamera: {fileID: 963194225}
+  PlayerNumber: 2
+--- !u!114 &169844537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169844532}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4287b2c523043ef4aa540233291411f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerA: {fileID: 334421336}
+  PlayerB: {fileID: 1919934276}
+  PlayerC: {fileID: 275234840}
+  InteractorA: {fileID: 94932241}
+  InteractorB: {fileID: 1144052697}
+  InteractorC: {fileID: 782434894}
+--- !u!114 &169844538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169844532}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1cd2cde583770642844e091f04795b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxRoomPlayer: {fileID: 334421336}
+  MaxRoomInteractor: {fileID: 94932241}
+  MinRoomPlayer: {fileID: 275234840}
+  MinRoomInteractor: {fileID: 782434894}
+  MiddleRoomPlayer: {fileID: 1919934276}
+  MiddleRoomInteractor: {fileID: 1144052697}
+  MaxRoomRoot: {fileID: 1568520641}
+  MinRoomRoot: {fileID: 376274977}
+  MiddleRoomRoot: {fileID: 2070642434}
+  currentState: 2
 --- !u!1 &185748470
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +942,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275234839}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fb161c161426b242a6f211ae32a2ab5, type: 3}
   m_Name: 
@@ -932,7 +956,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275234839}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c39a306569267048b222c9616e30c38, type: 3}
   m_Name: 
@@ -943,9 +967,9 @@ MonoBehaviour:
   Camera: {fileID: 744355358}
   Movespeed: 1
   gravity: -9.81
-  jumpHeight: 1
+  jumpHeight: 0.2
   groundCheck: {fileID: 766293081}
-  groundDistance: 0.25
+  groundDistance: 0.05
   groundMask:
     serializedVersion: 2
     m_Bits: 192
@@ -1191,7 +1215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334421335}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fb161c161426b242a6f211ae32a2ab5, type: 3}
   m_Name: 
@@ -1205,7 +1229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334421335}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c39a306569267048b222c9616e30c38, type: 3}
   m_Name: 
@@ -1215,13 +1239,13 @@ MonoBehaviour:
   Player: {fileID: 334421336}
   Camera: {fileID: 185748471}
   Movespeed: 25
-  gravity: -9.81
-  jumpHeight: 1
+  gravity: -49.05
+  jumpHeight: 5
   groundCheck: {fileID: 1597942649}
-  groundDistance: 0.25
+  groundDistance: 1.25
   groundMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 2176
 --- !u!1 &376274976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1764,7 @@ GameObject:
   - component: {fileID: 748381043}
   - component: {fileID: 748381042}
   - component: {fileID: 748381041}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Ground1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1893,7 @@ GameObject:
   - component: {fileID: 771196728}
   - component: {fileID: 771196727}
   - component: {fileID: 771196726}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Ground1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3128,7 +3152,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 334421336}
   m_RootOrder: 1
@@ -3751,7 +3775,7 @@ MonoBehaviour:
   groundDistance: 0.25
   groundMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 1152
 --- !u!114 &1919934279
 MonoBehaviour:
   m_ObjectHideFlags: 0
