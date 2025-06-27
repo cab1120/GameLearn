@@ -8,24 +8,16 @@ public class KeyController : MonoBehaviour
     public GameObject keyPrefab;
     public GameObject Player;
     
-    private Vector3 oldPlayerPosition;
     private float oldDistance;
     private float newDistance;
     private float scale;
-
-    void Start()
-    {
-        oldPlayerPosition = Player.transform.position;
-    }
-    void Update()
+    
+    void LateUpdate()
     {
         GetDistance();
     }
 
-    private void LateUpdate()
-    {
-        oldPlayerPosition = Player.transform.position;
-    }
+    
 
     private void GetDistance()
     {

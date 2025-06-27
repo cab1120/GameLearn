@@ -37,7 +37,7 @@ public class SwitchController : MonoBehaviour
             //MiddlePlayer.GetComponent<KeyController>().enabled = true;
             MiddleCamera.SetActive(true);
             PlayerNumber=2;
-            ConnectedController3.instance.currentState = ConnectedController3.State.MidlleRoom;
+            //ConnectedController3.instance.currentState = ConnectedController3.State.MidlleRoom;
         }
         else if (PlayerNumber == 2)
         {
@@ -48,7 +48,7 @@ public class SwitchController : MonoBehaviour
             //MaxPlayer.GetComponent<KeyController>().enabled = true;
             MaxCamera.SetActive(true);
             PlayerNumber=3;
-            ConnectedController3.instance.currentState = ConnectedController3.State.MaxRoom;
+            //ConnectedController3.instance.currentState = ConnectedController3.State.MaxRoom;
         }
     }
 
@@ -63,7 +63,7 @@ public class SwitchController : MonoBehaviour
             //MiddlePlayer.GetComponent<KeyController>().enabled = true;
             MiddleCamera.SetActive(true);
             PlayerNumber = 2;
-            ConnectedController3.instance.currentState = ConnectedController3.State.MidlleRoom;
+            //ConnectedController3.instance.currentState = ConnectedController3.State.MidlleRoom;
         }
         else if (PlayerNumber == 2)
         {
@@ -74,7 +74,7 @@ public class SwitchController : MonoBehaviour
             //MinPlayer.GetComponent<KeyController>().enabled = true;
             MinCamera.SetActive(true);
             PlayerNumber = 1;
-            ConnectedController3.instance.currentState = ConnectedController3.State.MinRoom;
+            //ConnectedController3.instance.currentState = ConnectedController3.State.MinRoom;
         }
     }
 }
