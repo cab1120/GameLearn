@@ -28,12 +28,12 @@ public class PlayerController3 : MonoBehaviour
     {
         _velocity.y = -2f;
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("角色位置 Y = " + transform.position.y);
+        //Debug.Log("角色位置 Y = " + transform.position.y);
 
         Ray ray = new Ray(transform.position + Vector3.up, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 10f, groundMask))
         {
-            Debug.Log("探测到地面 Y = " + hit.point.y);
+           //Debug.Log("探测到地面 Y = " + hit.point.y);
         }
     }
 

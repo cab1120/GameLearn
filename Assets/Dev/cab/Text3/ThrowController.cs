@@ -64,7 +64,7 @@ public class ThrowController : MonoBehaviour
         }
         else
         {
-            Debug.Log("No drag");
+            //Debug.Log("No drag");
             target.position=ray.origin + ray.direction * dragDistance; 
         }
         //target.position=ray.origin + ray.direction * dragDistance; 
@@ -77,7 +77,7 @@ public class ThrowController : MonoBehaviour
         rb.isKinematic = false;
         rb.useGravity = true;
 
-        float depth = dragDistance;
+       /* float depth = dragDistance;
         
         Vector3 screenStart = new Vector3(lastMousePosition.x, lastMousePosition.y, depth);
         Vector3 screenEnd = new Vector3(Input.mousePosition.x, Input.mousePosition.y, depth);
@@ -89,7 +89,7 @@ public class ThrowController : MonoBehaviour
         throwDir = Vector3.ProjectOnPlane(throwDir, Vector3.up); // 只保留水平分量,防止抛到脑后
         
         float dynamicForce = throwForce * (worldEnd - worldStart).magnitude;//根据鼠标移动距离改变力度
-        rb.AddForce(throwDir * dynamicForce, ForceMode.VelocityChange);//加力
+       // rb.AddForce(throwDir * dynamicForce, ForceMode.VelocityChange);//加力*/
         
     }
 
