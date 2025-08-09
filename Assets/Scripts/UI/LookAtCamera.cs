@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LookAtCamera : MonoBehaviour
 {
-    public Camera camera;
-    void LateUpdate()
+    public Camera camerainLook;
+
+    private void LateUpdate()
     {
-        if (camera != null)
+        if (camerainLook != null)
         {
-            transform.LookAt(camera.transform);
+            transform.LookAt(camerainLook.transform);
+            
             transform.Rotate(0, 180f, 0); // 背对摄像机转 180°
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThrowPen : MonoBehaviour
@@ -7,39 +5,33 @@ public class ThrowPen : MonoBehaviour
     public Camera playerCamera;
     public Transform target;
     public LayerMask mask;
+    public LayerMask maskonlypepn;
     private bool _isDragging;
-    private Rigidbody rb;
     private float dragDistance;
-    
-    void Start()
+    private Rigidbody rb;
+
+    private void Start()
     {
         rb = target.GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-        {
             TryStartDrag();
-        }
-        else if (Input.GetMouseButtonUp(0) && _isDragging)
-        {
-            EndDrag();
-        }
+        else if (Input.GetMouseButtonUp(0) && _isDragging) EndDrag();
 
-        if (_isDragging)
-        {
-            DragUpdate();
-        }
-            
+        if (_isDragging) DragUpdate();
     }
-    
+
     private void TryStartDrag()
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == target)
+        var ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, 100f, maskonlypepn);
+        //Debug.Log(hit.collider.gameObject.layer);
+        if (Physics.Raycast(ray, out hit, 100f, maskonlypepn) && hit.transform == target)
         {
-            
             dragDistance = hit.distance;
             _isDragging = true;
             rb.useGravity = false;
@@ -48,23 +40,20 @@ public class ThrowPen : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
+
     private void DragUpdate()
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, dragDistance, mask))
-        {
+        var ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, dragDistance, mask))
             //Debug.Log(hit.transform.name);
-            target.position=hit.point - ray.direction * 0.1f; // 留一点间距
-        }
+            target.position = hit.point - ray.direction * 0.1f; // 留一点间距
         else
-        {
             //Debug.Log("No drag");
-            target.position=ray.origin + ray.direction * dragDistance; 
-        }
-    }   
+            target.position = ray.origin + ray.direction * dragDistance;
+    }
+
     private void EndDrag()
     {
-        
         _isDragging = false;
         rb.isKinematic = false;
         rb.useGravity = true;

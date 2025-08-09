@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchController : MonoBehaviour
 {
-    static public SwitchController instance;
+    public static SwitchController instance;
     public GameObject MaxPlayer;
     public GameObject MinPlayer;
     public GameObject MiddlePlayer;
     public GameObject MaxCamera;
     public GameObject MinCamera;
     public GameObject MiddleCamera;
-    public int PlayerNumber=2;
+    public int PlayerNumber = 2;
 
-    void Start()
+    private void Start()
     {
         instance = this;
     }
-    void Update()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
             SwitchBigger();
@@ -36,7 +34,7 @@ public class SwitchController : MonoBehaviour
             //MiddlePlayer.GetComponent<PlayerController>().enabled = true;
             //MiddlePlayer.GetComponent<KeyController>().enabled = true;
             MiddleCamera.SetActive(true);
-            PlayerNumber=2;
+            PlayerNumber = 2;
             //ConnectedController3.instance.currentState = ConnectedController3.State.MidlleRoom;
         }
         else if (PlayerNumber == 2)
@@ -47,7 +45,7 @@ public class SwitchController : MonoBehaviour
             //MaxPlayer.GetComponent<PlayerController>().enabled = true;
             //MaxPlayer.GetComponent<KeyController>().enabled = true;
             MaxCamera.SetActive(true);
-            PlayerNumber=3;
+            PlayerNumber = 3;
             //ConnectedController3.instance.currentState = ConnectedController3.State.MaxRoom;
         }
     }

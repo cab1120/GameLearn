@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Watercheck : MonoBehaviour
@@ -9,11 +6,18 @@ public class Watercheck : MonoBehaviour
     public CatchPen catchPen;
     public ThrowPen throwPen;
     public GameObject communicate;
-    public GameObject Text1, Text2, Text3,Text4,Text5;
+    public GameObject Text1, Text2, Text3, Text4, Text5;
 
     public GameObject fakeFloor;
+    public GameObject fakePlayer;
+    public GameObject water;
+
+    public GameObject camerainwater;
+    public MoveController moveController2;
+    public ThrowPen throwPen2;
+    public Connetted connetted;
     private bool canMove = true;
-    private int num = 1,times=1;
+    private int num = 1, times = 1;
 
     private void Update()
     {
@@ -25,16 +29,35 @@ public class Watercheck : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.CompareTag("Player")&&times==1)
+        if (other.gameObject.CompareTag("Player") && times == 1)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            times++;
             moveController.enabled = false;
             catchPen.enabled = false;
             throwPen.enabled = false;
-            canMove = false;
             communicate.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            canMove = false;
         }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKey(KeyCode.E))
+            if (other.gameObject.CompareTag("Player"))
+            
+            {
+                Debug.Log("E");
+                other.gameObject.SetActive(false);
+                connetted.enabled = false;
+                moveController2.enabled = true;
+                throwPen2.enabled = true;
+                camerainwater.SetActive(true);
+                fakePlayer.layer = LayerMask.NameToLayer("Player");
+                foreach (var child in fakePlayer.GetComponentsInChildren<Transform>(true))
+                    child.gameObject.layer = LayerMask.NameToLayer("Player");
+                fakePlayer.tag = "Player";
+            }
     }
 
     public void Showtext()
@@ -52,7 +75,10 @@ public class Watercheck : MonoBehaviour
                 break;
             case 3:
                 Text2.SetActive(false);
-                fakeFloor.SetActive(false);
+                fakeFloor.GetComponent<MeshRenderer>().enabled = false;
+                water.SetActive(false);
+                //fakeFloor.SetActive(false);
+                GameObject.FindGameObjectWithTag("Pen").layer = LayerMask.NameToLayer("Dropped");
                 Text3.SetActive(true);
                 break;
             case 4:
@@ -64,7 +90,7 @@ public class Watercheck : MonoBehaviour
                 Text5.SetActive(true);
                 break;
             case 6:
-                Debug.Log("222");
+//                Debug.Log("222");
                 times++;
                 communicate.SetActive(false);
                 moveController.enabled = true;

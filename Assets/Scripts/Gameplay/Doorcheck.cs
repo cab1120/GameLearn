@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Doorcheck : MonoBehaviour
@@ -10,16 +6,22 @@ public class Doorcheck : MonoBehaviour
     public CatchPen catchPen;
     public ThrowPen throwPen;
     public GameObject communicate;
-    public Doorcheck doorcheck;
+    public GameObject waterCheck;
     public Doorhitcontroller hintUI;
     public GameObject Drink;
     public GameObject Text1, Text2, Text3;
-    private int num = 1,times=1;
     private bool canMove = true;
+    private int num = 1, times = 1;
+
+    private void Update()
+    {
+        if (!canMove) Showtext();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.CompareTag("Player")&&times==1)
+        //Debug.Log(other.gameObject.tag);
+        if (other.gameObject.CompareTag("Player") && times == 1)
         {
             times++;
             moveController.enabled = false;
@@ -34,14 +36,6 @@ public class Doorcheck : MonoBehaviour
         {
             Debug.Log("showpen");
             hintUI.ShowHint("这个门没有锁孔，不能从这一侧打开");
-        }
-    }
-
-    private void Update()
-    {
-        if (!canMove)
-        {
-            Showtext();
         }
     }
 
@@ -69,7 +63,8 @@ public class Doorcheck : MonoBehaviour
                 throwPen.enabled = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Drink.SetActive(true);
-                //doorcheck.enabled = false;
+                waterCheck.SetActive(true);
+                enabled = false;
                 break;
         }
     }

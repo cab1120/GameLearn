@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ReGameController : MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Scene currentScene = SceneManager.GetActiveScene();
+            var currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
     }

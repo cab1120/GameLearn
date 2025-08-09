@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Sliceable
   - Pen
+  - fakePlayer
+  - Stand
+  - FloatObj
   layers:
   - Default
   - TransparentFX
@@ -17,14 +20,14 @@ TagManager:
   - Interactor
   - Wall
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - FakeFloor
+  - Stair1
+  - Stair2
+  - Stair3
+  - Draw
+  - Floor
+  - Dropped
+  - Airfloor
   - 
   - 
   - 

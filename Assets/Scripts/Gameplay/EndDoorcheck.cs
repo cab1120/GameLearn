@@ -1,22 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndDoorcheck : MonoBehaviour
 {
     public MoveController moveController;
+
     //public CatchPen catchPen;
     public ThrowPen throwPen;
     public GameObject communicate;
     public Doorhitcontroller hintUI;
     public GameObject Text1, Text2, Text3;
-    private int num = 1,times=1;
-    private bool canMove = true;
     public GameObject Endpic;
+    private bool canMove = true;
+    private int num = 1, times = 1;
+
+    private void Update()
+    {
+        if (!canMove) Showtext();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.gameObject.CompareTag("Player")&&times==1)
+        if (other.gameObject.CompareTag("Player") && times == 1)
         {
             times++;
             moveController.enabled = false;
@@ -32,14 +37,6 @@ public class EndDoorcheck : MonoBehaviour
             moveController.enabled = false;
             throwPen.enabled = false;
             Endpic.SetActive(true);
-        }
-    }
-
-    private void Update()
-    {
-        if (!canMove)
-        {
-            Showtext();
         }
     }
 

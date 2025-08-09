@@ -10,43 +10,48 @@ public class StartDepthofField : MonoBehaviour
     public CatchPen catchPen;
     public ThrowPen throwPen;
     public StartDepthofField startDepthofField;
-    private DepthOfField dof;
     public GameObject communicate;
-    public GameObject Text1,Text2,Text3;
+    public GameObject Text1, Text2, Text3;
+    private DepthOfField dof;
     private int num = 1;
 
-    void Start()
+    private void Start()
     {
-        if (volume.profile.TryGet(out dof)) {
+        if (volume.profile.TryGet(out dof))
+        {
             dof.active = true;
             dof.mode.value = DepthOfFieldMode.Bokeh;
             dof.focusDistance.value = 0.1f; // 初始模糊
         }
+
         StartClearFocusTransition();
         communicate.SetActive(true);
     }
 
-    void Update()
+    private void Update()
     {
         Showtext();
     }
 
-    public void StartClearFocusTransition() {
+    public void StartClearFocusTransition()
+    {
         StartCoroutine(ClearFocusRoutine());
     }
 
-    IEnumerator ClearFocusRoutine() {
+    private IEnumerator ClearFocusRoutine()
+    {
         float t = 0;
-        float duration = 2.0f;
-        float startFocus = 0.1f;
-        float endFocus = 10f;
+        var duration = 2.0f;
+        var startFocus = 0.1f;
+        var endFocus = 10f;
         Cursor.lockState = CursorLockMode.Confined;
         moveController.enabled = false;
         catchPen.enabled = false;
         throwPen.enabled = false;
-        while (t < duration) {
-            t += Time.deltaTime*0.2f;
-            float current = Mathf.Lerp(startFocus, endFocus, t / duration);
+        while (t < duration)
+        {
+            t += Time.deltaTime * 0.2f;
+            var current = Mathf.Lerp(startFocus, endFocus, t / duration);
             dof.focusDistance.value = current;
             yield return null;
         }

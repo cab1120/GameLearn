@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace EzySlice {
+namespace EzySlice
+{
     /**
      * TextureRegion defines a region of a specific texture which can be used
      * for custom UV Mapping Routines.
@@ -10,32 +9,33 @@ namespace EzySlice {
      * TextureRegions are always stored in normalized UV Coordinate space between
      * 0.0f and 1.0f
      */
-    public struct TextureRegion {
-        private readonly float pos_start_x;
-        private readonly float pos_start_y;
-        private readonly float pos_end_x;
-        private readonly float pos_end_y;
-
-        public TextureRegion(float startX, float startY, float endX, float endY) {
-            this.pos_start_x = startX;
-            this.pos_start_y = startY;
-            this.pos_end_x = endX;
-            this.pos_end_y = endY;
+    public struct TextureRegion
+    {
+        public TextureRegion(float startX, float startY, float endX, float endY)
+        {
+            this.startX = startX;
+            this.startY = startY;
+            this.endX = endX;
+            this.endY = endY;
         }
 
-        public float startX { get { return this.pos_start_x; } }
-        public float startY { get { return this.pos_start_y; } }
-        public float endX { get { return this.pos_end_x; } }
-        public float endY { get { return this.pos_end_y; } }
+        public float startX { get; }
 
-        public Vector2 start { get { return new Vector2(startX, startY); } }
-        public Vector2 end { get { return new Vector2(endX, endY); } }
+        public float startY { get; }
+
+        public float endX { get; }
+
+        public float endY { get; }
+
+        public Vector2 start => new(startX, startY);
+        public Vector2 end => new(endX, endY);
 
         /**
          * Perform a mapping of a UV coordinate (computed in 0,1 space)
          * into the new coordinates defined by the provided TextureRegion
          */
-        public Vector2 Map(Vector2 uv) {
+        public Vector2 Map(Vector2 uv)
+        {
             return Map(uv.x, uv.y);
         }
 
@@ -43,9 +43,10 @@ namespace EzySlice {
          * Perform a mapping of a UV coordinate (computed in 0,1 space)
          * into the new coordinates defined by the provided TextureRegion
          */
-        public Vector2 Map(float x, float y) {
-            float mappedX = MAP(x, 0.0f, 1.0f, pos_start_x, pos_end_x);
-            float mappedY = MAP(y, 0.0f, 1.0f, pos_start_y, pos_end_y);
+        public Vector2 Map(float x, float y)
+        {
+            var mappedX = MAP(x, 0.0f, 1.0f, startX, endX);
+            var mappedY = MAP(y, 0.0f, 1.0f, startY, endY);
 
             return new Vector2(mappedX, mappedY);
         }
@@ -53,7 +54,8 @@ namespace EzySlice {
         /**
          * Our mapping function to map arbitrary values into our required texture region
          */
-        private static float MAP(float x, float in_min, float in_max, float out_min, float out_max) {
+        private static float MAP(float x, float in_min, float in_max, float out_min, float out_max)
+        {
             return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
     }
@@ -62,12 +64,12 @@ namespace EzySlice {
      * Define our TextureRegion extension to easily calculate
      * from a Texture2D Object.
      */
-    public static class TextureRegionExtension {
-
+    public static class TextureRegionExtension
+    {
         /**
          * Helper function to quickly calculate the Texture Region from a material.
          * This extension function will use the mainTexture component to perform the
-         * calculation. 
+         * calculation.
          * 
          * Will throw a null exception if the texture does not exist. See
          * Texture.getTextureRegion() for function details.
@@ -76,7 +78,8 @@ namespace EzySlice {
             int pixX,
             int pixY,
             int pixWidth,
-            int pixHeight) {
+            int pixHeight)
+        {
             return mat.mainTexture.GetTextureRegion(pixX, pixY, pixWidth, pixHeight);
         }
 
@@ -86,27 +89,28 @@ namespace EzySlice {
          * bottom left corner of the texture.
          * 
          * The texture region will automatically be calculated to ensure that it
-         * will fit inside the provided texture. 
+         * will fit inside the provided texture.
          */
         public static TextureRegion GetTextureRegion(this Texture tex,
             int pixX,
             int pixY,
             int pixWidth,
-            int pixHeight) {
-            int textureWidth = tex.width;
-            int textureHeight = tex.height;
+            int pixHeight)
+        {
+            var textureWidth = tex.width;
+            var textureHeight = tex.height;
 
             // ensure we are not referencing out of bounds coordinates
             // relative to our texture
-            int calcWidth = Mathf.Min(textureWidth, pixWidth);
-            int calcHeight = Mathf.Min(textureHeight, pixHeight);
-            int calcX = Mathf.Min(Mathf.Abs(pixX), textureWidth);
-            int calcY = Mathf.Min(Mathf.Abs(pixY), textureHeight);
+            var calcWidth = Mathf.Min(textureWidth, pixWidth);
+            var calcHeight = Mathf.Min(textureHeight, pixHeight);
+            var calcX = Mathf.Min(Mathf.Abs(pixX), textureWidth);
+            var calcY = Mathf.Min(Mathf.Abs(pixY), textureHeight);
 
-            float startX = calcX / (float) textureWidth;
-            float startY = calcY / (float) textureHeight;
-            float endX = (calcX + calcWidth) / (float) textureWidth;
-            float endY = (calcY + calcHeight) / (float) textureHeight;
+            var startX = calcX / (float)textureWidth;
+            var startY = calcY / (float)textureHeight;
+            var endX = (calcX + calcWidth) / (float)textureWidth;
+            var endY = (calcY + calcHeight) / (float)textureHeight;
 
             // texture region is a struct which is allocated on the stack
             return new TextureRegion(startX, startY, endX, endY);
