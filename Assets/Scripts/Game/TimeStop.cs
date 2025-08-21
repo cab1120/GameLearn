@@ -24,7 +24,6 @@ public class TimeStop : MonoBehaviour
     {
         Time.timeScale = 0f;  // 停止时间
         yield return new WaitForSecondsRealtime(seconds); // 不受 timeScale 影响
-        Time.timeScale = 1f;  // 恢复时间
-        GameState.instance.Endpic.SetActive(false);
+        Time.timeScale = 1f;  // 停止时间
     }
 }

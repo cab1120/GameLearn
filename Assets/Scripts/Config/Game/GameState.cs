@@ -24,4 +24,5 @@ public class GameState : MonoBehaviour
     {
         instance = this;
     }
+    
 }

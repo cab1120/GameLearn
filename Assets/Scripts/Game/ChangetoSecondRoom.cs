@@ -17,7 +17,6 @@ public class ChangetoSecondRoom : MonoBehaviour
 
     private void Change()
     {
-        Debug.Log("Changeto Second Room");
         GameState.instance.player.SetActive(false);
         GameState.instance.connetted.enabled = false;
         GameState.instance.playerMovement.enabled = true;

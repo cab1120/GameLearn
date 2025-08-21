@@ -2,14 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// 【升级版】
-/// 直接在两个指定的摄像机之间进行平滑的动画过渡。
-/// 提供一个单例实例，方便从其他脚本调用。
-/// </summary>
 public class CameraSwitch : MonoBehaviour
 {
-    // --- 单例模式设置 ---
     public static CameraSwitch Instance { get; private set; }
 
     [Header("场景中的摄像机")]
@@ -46,10 +40,8 @@ public class CameraSwitch : MonoBehaviour
         perspectiveCamera.enabled = true;
         orthographicCamera.enabled = false;
     }
-
-    /// <summary>
-    /// 【新】公共方法：从透视切换到正交
-    /// </summary>
+    
+    //从透视切换到正交
     public void PerToOrt()
     {
         if (!isTransitioning && perspectiveCamera.enabled)
@@ -57,10 +49,7 @@ public class CameraSwitch : MonoBehaviour
             StartCoroutine(AnimateTransition(perspectiveCamera, orthographicCamera));
         }
     }
-
-    /// <summary>
-    /// 【新】公共方法：从正交切换回透视
-    /// </summary>
+    //从正交切换回透视
     public void OrtToPer()
     {
         if (!isTransitioning && orthographicCamera.enabled)

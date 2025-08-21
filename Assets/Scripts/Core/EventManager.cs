@@ -28,6 +28,8 @@ public class EventManager
     public static event Action OnChangetoSecond;
     //时停
     public static event Action<float> OnTimeStop; 
+    //切换场景
+    public static event Action<int> OnChangeScenceEvent;
     
     /// <summary>
     /// 发布方法
@@ -46,4 +48,5 @@ public class EventManager
     public static void RaiseDisableScripts() => OnDisableScripts?.Invoke();
     public static void RaiseChangetoSecond() => OnChangetoSecond?.Invoke();
     public static void RaiseTimeStop(float timeStop) => OnTimeStop?.Invoke(timeStop);
+    public static void RaiseChangeScenceEvent(int sceneNum) => OnChangeScenceEvent?.Invoke(sceneNum);
 }

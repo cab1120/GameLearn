@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -10,13 +11,10 @@ public class StanderChecker : MonoBehaviour
     public GameObject notes;
     public GameObject notes2;
     public GameObject player;
-    public MoveandJump moveController;
-
-    // 您不再需要手动控制这些摄像机对象了
-    // public GameObject Camera;
-    // public GameObject viewCamera;
+    public PlayerInputHandler playerInputHandler;
+    public PlayerMovement playerMovement;
     
-    // 我们需要主摄像机的引用来修改Culling Mask
+    public TextMeshProUGUI textMesh;
     public Camera mainPlayerCamera; 
 
     public GameObject fixedObj1;
@@ -27,7 +25,7 @@ public class StanderChecker : MonoBehaviour
     public GameObject fakeWall;
 
     public GameObject objects;
-    private bool isInPuzzleView; // 使用一个更清晰的变量名代替 'check'
+    private bool isInPuzzleView; 
     private int fixnum = 1;
     
     private bool isPlayerInTrigger = false; // 用于跟踪玩家是否在触发器内
@@ -69,13 +67,8 @@ public class StanderChecker : MonoBehaviour
         
         notes2.SetActive(true);
         notes.SetActive(false);
-        // --- 正确的调用方式 ---
         // 调用 CameraSwitcher 的单例实例来启动从透视到正交的动画
         CameraSwitch.Instance.PerToOrt(); 
-        
-        // 您不再需要手动开关摄像机了，动画脚本会处理！
-        // Camera.SetActive(false);
-        // viewCamera.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Confined;
         
@@ -86,7 +79,9 @@ public class StanderChecker : MonoBehaviour
         controller.enabled = true;
         player.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         
-        moveController.enabled = false;
+        playerInputHandler.enabled = false;
+        playerMovement.enabled = false;
+        textMesh.text = "注意观察提示框颜色，并且按Q固定相应颜色物体";
     }
 
     // 退出解谜视角
@@ -95,16 +90,13 @@ public class StanderChecker : MonoBehaviour
         fakeWall.SetActive(false);
         isInPuzzleView = false;
         Cursor.lockState = CursorLockMode.Locked;
-        moveController.enabled = true;
+        playerInputHandler.enabled = true;
+        playerMovement.enabled = true;
         notes2.SetActive(false);
-        
+        textMesh.text = "试着跳上平台吧";
         // --- 正确的调用方式 ---
         // 调用 CameraSwitcher 的单例实例来启动从正交到透视的动画
         CameraSwitch.Instance.OrtToPer();
-        
-        // 动画脚本会自动处理摄像机的激活状态
-        // viewCamera.SetActive(false);
-        // Camera.SetActive(true);
         
         objects.SetActive(false);
         AddLayerToCameraCullingMask(mainPlayerCamera, 11);
@@ -127,10 +119,7 @@ public class StanderChecker : MonoBehaviour
             notes.SetActive(false);
         }
     }
-
-    // OnTriggerStay 不再需要，因为Update中的逻辑已经覆盖了
     
-    // --- 其他方法保持不变 ---
 
     private void FixedObj()
     {

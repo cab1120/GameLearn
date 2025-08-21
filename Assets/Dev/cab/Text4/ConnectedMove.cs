@@ -9,7 +9,7 @@ public class ConnectedMove : MonoBehaviour
     [Tooltip("自定义回弹动画的缓动曲线。\n横轴是时间(0->1)，纵轴是进度(0->1)")]
     public AnimationCurve returnCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // 提供一个默认曲线
 
-    public Camera camera;
+    public Camera maincamera;
     private Vector3 dragOffset;
     private bool isDragging;
     
@@ -24,8 +24,8 @@ public class ConnectedMove : MonoBehaviour
     private void Update()
     {
         var mousePos = Input.mousePosition;
-        mousePos.z = camera.WorldToScreenPoint(transform.position).z;
-        var worldMouse = camera.ScreenToWorldPoint(mousePos);
+        mousePos.z = maincamera.WorldToScreenPoint(transform.position).z;
+        var worldMouse = maincamera.ScreenToWorldPoint(mousePos);
 
         if (Input.GetMouseButtonDown(0))
         {
