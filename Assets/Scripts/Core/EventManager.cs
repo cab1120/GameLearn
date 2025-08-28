@@ -30,6 +30,8 @@ public class EventManager
     public static event Action<float> OnTimeStop; 
     //切换场景
     public static event Action<int> OnChangeScenceEvent;
+    //ui按钮
+    public static event Action<GameObject> OnChangeButton; 
     
     /// <summary>
     /// 发布方法
@@ -49,4 +51,5 @@ public class EventManager
     public static void RaiseChangetoSecond() => OnChangetoSecond?.Invoke();
     public static void RaiseTimeStop(float timeStop) => OnTimeStop?.Invoke(timeStop);
     public static void RaiseChangeScenceEvent(int sceneNum) => OnChangeScenceEvent?.Invoke(sceneNum);
+    public static void RaiseChangeButtonEvent(GameObject button) => OnChangeButton?.Invoke(button);
 }
