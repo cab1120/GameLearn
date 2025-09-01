@@ -1,10 +1,13 @@
+using System.Collections;
 using TMPro; 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI taskListText;
+    public Text TopicTest;
 
     private void OnEnable()
     {
@@ -13,6 +16,7 @@ public class UIManager : MonoBehaviour
         EventManager.OnHideDialogue += HideDialogue;
         EventManager.OnShowTaskList += ShowTaskList;
         EventManager.OnHideTaskList += HideTaskList;
+        EventManager.OnShowTopicList += ShowTopic;
     }
 
     private void OnDisable()
@@ -22,6 +26,7 @@ public class UIManager : MonoBehaviour
         EventManager.OnHideDialogue -= HideDialogue;
         EventManager.OnShowTaskList -= ShowTaskList;
         EventManager.OnHideTaskList -= HideTaskList;
+        EventManager.OnShowTopicList -= ShowTopic;
     }
 
     private void ShowDialogue(string text)
@@ -37,6 +42,17 @@ public class UIManager : MonoBehaviour
         dialogueText.transform.parent.gameObject.SetActive(false);
     }
 
+    private void ShowTopic(string text)
+    {
+        TopicTest.transform.parent.gameObject.SetActive(true);
+        TopicTest.text = text;
+        StartCoroutine(HideUIAfterTime());
+    }
+    private IEnumerator HideUIAfterTime()
+    {
+        yield return new WaitForSeconds(2);
+        TopicTest.transform.parent.gameObject.SetActive(false);
+    }
     private void ShowTaskList(string text)
     {
         taskListText.transform.parent.gameObject.SetActive(true);

@@ -25,6 +25,7 @@ public class WaterCheckState : IGameState
     {
         EventManager.RaiseDisableScripts();
         EventManager.RaiseDisablePlayerInput();
+        EventManager.RaiseOnDisableConnectedMovement();
         EventManager.RaiseShowDialogue(dialogues[dialogueIndex]);
         
         GameState.instance.fakeFloor.GetComponent<MeshRenderer>().enabled = false;

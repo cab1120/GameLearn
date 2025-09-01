@@ -61,8 +61,16 @@ public class PlayerMovement : MonoBehaviour
         this.cameraRotation=cameraRotation;
         this.playerRotation=playerRotation;
     }
-    private void EnableInput() => isInputEnabled = true;
-    private void DisableInput() => isInputEnabled = false;
+    private void EnableInput()
+    {
+        isInputEnabled = true;
+    }
+
+    private void DisableInput()
+    {
+        isInputEnabled = false;
+        animator.SetBool("CanWalk", false);
+    }
 
     private void Update()
     {

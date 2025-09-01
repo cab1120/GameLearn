@@ -13,6 +13,7 @@ public class PlaytoDrinkState : IGameState
     public void Enter()
     {
         EventManager.RaiseEnablePlayerInput();
+        EventManager.RaiseOnEnableConnectedMovement();
         EventManager.RaiseEnableScripts();
         EventManager.RaiseShowTaskList("寻找房间异常之处");
     }

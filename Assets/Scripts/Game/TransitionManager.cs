@@ -63,14 +63,14 @@ public class TransitionManager : MonoBehaviour
     /// 公开的接口：开始一个带过渡效果的切换
     /// </summary>
     /// <param name="onSwitchAction">在屏幕全黑时执行的实际切换操作</param>
-    public void StartCharacterSwitch(Action onSwitchAction)
+    public void StartCharacterSwitch(Action onSwitchAction,Action onEndAction)
     {
         // 确保效果是从默认状态开始的
         ResetEffects(); 
-        StartCoroutine(TransitionCoroutine(onSwitchAction));
+        StartCoroutine(TransitionCoroutine(onSwitchAction, onEndAction));
     }
 
-    private IEnumerator TransitionCoroutine(Action onSwitchAction)
+    private IEnumerator TransitionCoroutine(Action onSwitchAction,Action onEndAction)
     {
         float halfDuration = transitionDuration / 2f;
         float elapsedTime = 0f;
@@ -110,5 +110,6 @@ public class TransitionManager : MonoBehaviour
         }
 
         ResetEffects(); // 确保最终效果被完全重置
+        onEndAction?.Invoke();
     }
 }

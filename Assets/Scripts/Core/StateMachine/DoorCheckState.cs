@@ -19,6 +19,7 @@ public class DoorCheckState : IGameState
     public void Enter()
     {
         EventManager.RaiseDisableScripts();
+        EventManager.RaiseOnDisableConnectedMovement();
         EventManager.RaiseDisablePlayerInput();
         EventManager.RaiseShowDialogue(dialogues[dialogueIndex]);
     }

@@ -2,13 +2,27 @@ using UnityEngine;
 
 public class CatchPen : MonoBehaviour
 {
+    public static CatchPen instance;
+    public GameState gameState;
+    
     public GameObject keyPrefab;
     public GameObject Player;
     private float newDistance;
 
     private float oldDistance;
     private float scale;
+    void Awake()
+    {
+        instance = this;
+        keyPrefab = gameState.Pen;
+    }
 
+    public void changeTarget()
+    {
+        keyPrefab = gameState.Plane;
+        oldDistance = 0;
+        newDistance = 0;
+    }
     private void LateUpdate()
     {
         GetDistance();

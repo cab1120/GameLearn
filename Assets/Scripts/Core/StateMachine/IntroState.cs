@@ -17,8 +17,10 @@ public class IntroState : IGameState
     // ReSharper disable Unity.PerformanceAnalysis
     public void Enter()
     {
+        
         EventManager.RaiseDepthofField();
         EventManager.RaiseDisablePlayerInput();
+        EventManager.RaiseOnDisableConnectedMovement();
         EventManager.RaiseShowDialogue(dialogues[dialogueIndex]);
     }
 

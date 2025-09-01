@@ -13,6 +13,7 @@ public class PlaytoDoorState : IGameState
     public void Enter()
     {
         EventManager.RaiseEnablePlayerInput();
+        EventManager.RaiseOnEnableConnectedMovement();
         EventManager.RaiseEnableScripts();
         EventManager.RaiseShowTaskList("尝试着开门到另外的教室盛水");
     }

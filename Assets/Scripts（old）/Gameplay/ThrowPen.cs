@@ -3,7 +3,9 @@ using UnityEngine;
 public class ThrowPen : MonoBehaviour
 {
     public Camera playerCamera;
-    public Transform target;
+    public Transform target1;
+    public Transform target2;
+    private Transform target;
     public LayerMask mask;
     public LayerMask maskonlypepn;
     private bool _isDragging;
@@ -12,7 +14,6 @@ public class ThrowPen : MonoBehaviour
 
     private void Start()
     {
-        rb = target.GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -30,14 +31,19 @@ public class ThrowPen : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(ray, out hit, 100f, maskonlypepn);
         //Debug.Log(hit.collider.gameObject.layer);
-        if (Physics.Raycast(ray, out hit, 100f, maskonlypepn) && hit.transform == target)
+        if (Physics.Raycast(ray, out hit, 100f, maskonlypepn))
         {
-            dragDistance = hit.distance;
-            _isDragging = true;
-            rb.useGravity = false;
-            rb.velocity = Vector3.zero;
-            rb.isKinematic = true;
-            rb.angularVelocity = Vector3.zero;
+            if (hit.transform == target1 || hit.transform == target2)
+            {
+                target = hit.transform;
+                rb = hit.rigidbody;
+                dragDistance = hit.distance;
+                _isDragging = true;
+                rb.useGravity = false;
+                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;
+                rb.angularVelocity = Vector3.zero;
+            };
         }
     }
 

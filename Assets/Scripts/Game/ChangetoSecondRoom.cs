@@ -21,7 +21,7 @@ public class ChangetoSecondRoom : MonoBehaviour
         GameState.instance.connetted.enabled = false;
         GameState.instance.playerMovement.enabled = true;
         GameState.instance.playerInputHandler.enabled = true;
-        GameState.instance.throwPen.enabled = true;
+        //GameState.instance.throwPen.enabled = true;
         GameState.instance.camera2.SetActive(true);
         GameState.instance.fakeplayer.layer = LayerMask.NameToLayer("Player");
         foreach (var child in GameState.instance.fakeplayer.GetComponentsInChildren<Transform>(true))

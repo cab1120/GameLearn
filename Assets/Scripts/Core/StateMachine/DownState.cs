@@ -13,6 +13,7 @@ public class DownState : IGameState
     public void Enter()
     {
         EventManager.RaiseEnablePlayerInput();
+        EventManager.RaiseOnEnableConnectedMovement();
         EventManager.RaiseEnableScripts();
         EventManager.RaiseShowTaskList("寻找钥匙，并将其带入下一层");
     }

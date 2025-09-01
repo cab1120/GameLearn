@@ -16,4 +16,11 @@ public class PlayerState : ScriptableObject
     
     [Header("Checker")]
     public bool canJump = true;
+    
+    [Header("Pen")]
+    public bool havePen = false;
+    
+    [Header("Key")]
+    public bool haveKey = false;
+    
 }

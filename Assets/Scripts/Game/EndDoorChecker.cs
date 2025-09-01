@@ -5,6 +5,7 @@ using UnityEngine;
 public class EndDoorChecker : MonoBehaviour
 {
     private GameFlowManager gameFlowManager;
+    public PlayerState playerState;
     private void Start()
     {
         gameFlowManager = FindObjectOfType<GameFlowManager>();
@@ -13,12 +14,10 @@ public class EndDoorChecker : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
-        }
-
-        if (other.gameObject.CompareTag("Pen"))
-        {
-            gameFlowManager.ChangeState(new EndGameState(gameFlowManager));
+            if (playerState.haveKey)
+            {
+                gameFlowManager.ChangeState(new EndGameState(gameFlowManager));
+            }
         }
     }
 }

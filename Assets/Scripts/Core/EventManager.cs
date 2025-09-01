@@ -19,6 +19,7 @@ public class EventManager
     public static event Action OnHideDialogue; 
     public static event Action<string> OnShowTaskList; //(string 是任务内容)
     public static event Action OnHideTaskList;
+    public static event Action<string> OnShowTopicList;
     //初始景深
     public static event Action OnDepthofField;
     //脚本控制
@@ -32,6 +33,17 @@ public class EventManager
     public static event Action<int> OnChangeScenceEvent;
     //ui按钮
     public static event Action<GameObject> OnChangeButton; 
+    //pen移动
+    public static event Action OnEnablePenInput;
+    public static event Action OnDisablePenInput;
+    //plane移动拖动
+    public static event Action OnEnablePlaneDrag;
+    public static event Action OnDisablePlaneDrag;
+    public static event Action OnEnablePlaneMovement;
+    public static event Action OnDisablePlaneMovement;
+    //关联移动
+    public static event Action OnEnableConnectedMovement;
+    public static event Action OnDisableConnectedMovement;
     
     /// <summary>
     /// 发布方法
@@ -52,4 +64,13 @@ public class EventManager
     public static void RaiseTimeStop(float timeStop) => OnTimeStop?.Invoke(timeStop);
     public static void RaiseChangeScenceEvent(int sceneNum) => OnChangeScenceEvent?.Invoke(sceneNum);
     public static void RaiseChangeButtonEvent(GameObject button) => OnChangeButton?.Invoke(button);
+    public static void RaiseEnablePenInput() => OnEnablePenInput?.Invoke();
+    public static void RaiseDisablePenInput() => OnDisablePenInput?.Invoke();
+    public static void RaiseEnablePlaneDrag() => OnEnablePlaneDrag?.Invoke();
+    public static void RaiseDisablePlaneDrag() => OnDisablePlaneDrag?.Invoke();
+    public static void RaiseEnablePlaneMovement() => OnEnablePlaneMovement?.Invoke();
+    public static void RaiseDisablePlaneMovement() => OnDisablePlaneMovement?.Invoke();
+    public static void RaiseOnEnableConnectedMovement() => OnEnableConnectedMovement?.Invoke();
+    public static void RaiseOnDisableConnectedMovement() => OnDisableConnectedMovement?.Invoke();
+    public static void RaiseShowTopicList(string text) => OnShowTopicList?.Invoke(text);
 }

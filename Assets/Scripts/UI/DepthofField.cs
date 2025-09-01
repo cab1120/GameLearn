@@ -35,7 +35,7 @@ public class DepthofField : MonoBehaviour
         float t = 0;
         var duration = 2.0f;
         var startFocus = 0.1f;
-        var endFocus = 10f;
+        var endFocus = 20f;
         Cursor.lockState = CursorLockMode.Confined;
         
         while (t < duration)
@@ -47,5 +47,6 @@ public class DepthofField : MonoBehaviour
         }
 
         dof.focusDistance.value = endFocus;
+        dof.active = false;
     }
 }

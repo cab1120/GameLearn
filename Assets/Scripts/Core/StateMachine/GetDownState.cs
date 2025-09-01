@@ -16,7 +16,7 @@ public class GetDownState : IGameState
     {
         EventManager.RaiseShowTaskList("捡起钥匙开门");
         //EventManager.RaiseChangetoSecond();
-        TransitionManager.Instance.StartCharacterSwitch(() =>
+        /*TransitionManager.Instance.StartCharacterSwitch(() =>
         {
             GameState.instance.player.SetActive(false);
             GameState.instance.connetted.enabled = false;
@@ -28,7 +28,7 @@ public class GetDownState : IGameState
             foreach (var child in GameState.instance.fakeplayer.GetComponentsInChildren<Transform>(true))
                 child.gameObject.layer = LayerMask.NameToLayer("Player");
             GameState.instance.fakeplayer.tag = "Player";
-        });
+        });*/
     }
 
     public void Execute()
