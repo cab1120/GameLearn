@@ -18,4 +18,5 @@ MonoBehaviour:
   jumpHeight: 1
   groundDistance: 1
   canJump: 0
-  havePen: 0
+  havePen: 1
+  haveKey: 0

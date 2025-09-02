@@ -35,6 +35,10 @@ public class PlaneController : MonoBehaviour
     private bool isFlying = false;
     private bool canDrag = false;
     private bool canFly = false;
+    
+    //录制
+    /*public GameObject cameraObject;
+    public GameObject cameraVedio;*/
 
     // 事件订阅和取消订阅
     private void OnEnableDrag() => canDrag = true;
@@ -167,6 +171,8 @@ public class PlaneController : MonoBehaviour
     
     void HandleFlight()
     {
+        /*cameraObject.SetActive(false);
+        cameraVedio.SetActive(true);*/
         if (rb.velocity.magnitude > maxFlightSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxFlightSpeed;
