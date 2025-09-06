@@ -37,8 +37,8 @@ public class PlaneController : MonoBehaviour
     private bool canFly = false;
     
     //录制
-    /*public GameObject cameraObject;
-    public GameObject cameraVedio;*/
+    public GameObject cameraObject;
+    public GameObject cameraVedio;
 
     // 事件订阅和取消订阅
     private void OnEnableDrag() => canDrag = true;

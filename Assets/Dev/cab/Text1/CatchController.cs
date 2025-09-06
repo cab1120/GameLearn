@@ -77,7 +77,7 @@ public class CatchController : MonoBehaviour
             {
                 heldObject.localScale /= js;
                 heldObject.localScale *= scale;
-                js = scale;
+                js=scale;
             }
 
 
