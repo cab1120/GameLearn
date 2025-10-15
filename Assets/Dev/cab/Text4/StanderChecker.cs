@@ -125,9 +125,9 @@ public class StanderChecker : MonoBehaviour
     {
         switch (fixnum)
         {
-            case 1: Fix(fixedObj1); notes2.GetComponent<Image>().color=Color.red;break;
-            case 2: Fix(fixedObj2); notes2.GetComponent<Image>().color=Color.blue;break;
-            case 3: Fix(fixedObj3); notes2.GetComponent<Image>().color=Color.white;break;
+            case 1: Fix(fixedObj1); notes2.GetComponent<Image>().color=new Color32(255,0,0,80);break;
+            case 2: Fix(fixedObj2); notes2.GetComponent<Image>().color=new Color32(0,0,255,80);break;
+            case 3: Fix(fixedObj3); notes2.GetComponent<Image>().color=new Color32(255,255,255,80);break;
             case 4: Fix(fixedObj4); break;
         }
     }

@@ -15,6 +15,7 @@ public class EndGameState : IGameState
     {
         EventManager.RaiseHideTaskList();
         EventManager.RaiseTimeStop(0.5f);
+        
         EventManager.RaiseChangeScenceEvent(SceneManager.GetActiveScene().buildIndex+1);
     }
 

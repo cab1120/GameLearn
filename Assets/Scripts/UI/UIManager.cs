@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
-    public TextMeshProUGUI taskListText;
+    public Text taskListText;
     public Text TopicTest;
 
     private void OnEnable()
